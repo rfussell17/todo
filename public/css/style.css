@@ -1,0 +1,10 @@
+
+#main-icon {
+    transition: all .1s ease-in-out;
+}
+
+#main-icon:hover,
+#main-icon:focus
+ {
+    transform: scale(1.02);
+}
