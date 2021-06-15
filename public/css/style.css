@@ -1,10 +1,16 @@
 
 #main-icon {
     transition: all .1s ease-in-out;
+    color: #343a40;
 }
 
 #main-icon:hover,
 #main-icon:focus
  {
     transform: scale(1.02);
+    color: #272f36;
+}
+
+a:link {
+ text-decoration: none;
 }

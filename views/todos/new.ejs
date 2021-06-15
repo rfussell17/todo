@@ -1,0 +1,36 @@
+<% layout('/layouts/boilerplate')%>
+<div class="parent">
+    <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
+      <% for(let todo of todos){ %>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#todo-<%=todo._id%>" aria-expanded="false" aria-controls="todo-<%=todo._id%>">
+              <%= todo.name %>
+                <a href="/todos/<%=todo._id%>"><i class="fas fa-pencil-alt icon"></i></a>
+            </button>
+          </h2>
+          <div id="todo-<%=todo._id%>" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <%= todo.details %>
+            </div>
+          </div>
+        </div>
+        <% } %>
+    </div>
+  <section id="form-input-submit" id="collapse">
+    <form action="/todos" method="post" class="todo-form">
+      <div class="form-floating mb-3 col-12">
+        <input type="text" class="form-control secondary" name="name" id="name" placeholder="name@example.com">
+        <label for="floatingInput">Todo</label>
+      </div>
+      <div class="form-floating col-12 mb-3 input-details ">
+        <input type="text" class="form-control" name="details" id="details">
+        <label for="floatingInput">Add more details...</label>
+      </div>
+      <button type="submit" class="btn btn-success" class="btn-submit" id="btn-hero-submit"><i
+          class="fas fa-check"></i></button>
+    </form>
+  </section>
+</div>

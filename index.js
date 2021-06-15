@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 
+const Todo = require("./models/todo");
+const todoRoutes = require('./routes/todos');
+
 mongoose.connect('mongodb://localhost:27017/todo-new', {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -26,6 +29,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use('/todos', todoRoutes);
 
 app.get('/', (req, res) => {
     res.render('home')
