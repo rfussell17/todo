@@ -10,28 +10,27 @@ router.get("/", catchAsync(async (req, res) => {
   })
 );
 
-router.get("/new", isLoggedIn, async (req, res) => {
-  const todos = await Todo.find({});
-  res.render("todos/new", { todos });
-});
-
 router.post('/', isLoggedIn, validateTodo, catchAsync(async (req, res, next) => {
-  const newTodo = new Todo(req.body);
+  const newTodo = new Todo(req.body.todo);
+  newTodo.author = req.user._id;
   await newTodo.save();
   req.flash('success', 'Successfully added to-do');
   res.redirect(`/todos`);
 }))
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const todo = await Todo.findById(id);
-  if(!todo){
-    req.flash('error', 'Cannot find that todo!');
-    return res.redirect('/todos');
+router.get('/:id', catchAsync(async (req, res,) => {
+  const todo = await Todo.findById(req.params.id).populate({
+      path: 'todos',
+      populate: {
+          path: 'author'
+      }
+  }).populate('author');
+  if (!todo) {
+      req.flash('error', 'Cannot find that todo!');
+      return res.redirect('/todos');
   }
-  console.log(todo);
-  res.render("todos/show", { todo, title: todo.name });
-});
+  res.render('todos/show', { todo });
+}));
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -40,7 +39,7 @@ router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
       req.flash('error', 'Cannot find that todo!');
       return res.redirect('/todoss');
   }
-  res.render('todos/edit', { todo });
+  res.render('todos/edit', { todo, name: todo.name });
 }))
 
 router.put('/:id', isLoggedIn, validateTodo, catchAsync(async (req, res) => {

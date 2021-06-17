@@ -6,12 +6,12 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const ExpressError = require('./helpers/ExpressError');
-const todoRoutes = require('./routes/todos');
-const userRoutes = require('./routes/users');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-const Todo = require('./models/todo');
+
+const todoRoutes = require('./routes/todos');
+const userRoutes = require('./routes/users');
 
 mongoose.connect('mongodb://localhost:27017/todo-new', {
     useNewUrlParser: true,
@@ -65,8 +65,8 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use('/', userRoutes);
 app.use('/todos', todoRoutes);
-app.use('/users', userRoutes);
 
 app.get('/', (req, res) => {
     res.render('home')
