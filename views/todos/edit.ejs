@@ -1,0 +1,25 @@
+<% layout('/layouts/boilerplate')%>
+<div class="container">
+    <p class="display-6 text-center mt-5 mb-5"> edit <%= todo.name %></p>
+    <section id="form-input-submit" id="collapse">
+      <form action="/todos/<%=todo._id%>?_method=PUT" method="POST" class="validated-form" novalidate>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" value="<%=todo.name%> " name="name" id="name" required>
+          <label for="floatingInput">edit todo</label>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" value="<%=todo.details%>" name="details" id="details" required>
+          <label for="floatingTextarea">edit details</label>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success mt-3" class="btn-submit" id="btn-hero-submit"><i
+            class="fas fa-check"></i></button>
+      </form>
+    </section>
+
+  </div>

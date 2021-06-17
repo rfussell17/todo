@@ -1,16 +1,41 @@
 
+.todo-item{
+    margin: 0;
+    padding: 0;
+}
+
+.crossed-off {
+    text-decoration: line-through;
+}
+
+/* ICONS */
+
 #main-icon {
     transition: all .1s ease-in-out;
     color: #343a40;
 }
 
-#main-icon:hover,
-#main-icon:focus
+#icon:hover,
+#icon:focus
  {
     transform: scale(1.02);
     color: #272f36;
 }
 
-a:link {
+a:link, .fas {
  text-decoration: none;
+ color: #272f36;
+}
+
+.btn:hover, .btn-icon:hover {
+    color: #fff;
+    background-color: #272f36;
+} 
+
+.btn-icon:hover .btn {
+    color: #ddd;
+ }
+
+.fa-check {
+    color: #fff;
 }

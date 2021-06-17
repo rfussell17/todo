@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-
 const Todo = require("./models/todo");
 
 mongoose
-  .connect("mongodb://localhost:27017/todoApp", { useNewUrlParser: true })
+  .connect("mongodb://localhost:27017/todo-new", { useNewUrlParser: true })
   .then(() => {
     console.log("mongo connection open");
   })
