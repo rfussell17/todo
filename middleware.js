@@ -21,12 +21,12 @@ module.exports.validateTodo = (req, res, next) => {
     }
 }
 
-// module.exports.isAuthor = async(req, res, next) => {
-//     const { id } = req.params;
-//     const todo = await Todo.findById(id)
-//     if(!todo.author.equals(req.user._id)){
-//         req.flash('error', 'You do not have permission to do that');
-//         return res.redirect(`./todos/${id}`)
-//     }
-//     next();
-// }
+module.exports.isAuthor = async(req, res, next) => {
+    const { id } = req.params;
+    const todo = await Todo.findById(id)
+    if(!todo.author.equals(req.user._id)){
+        req.flash('error', 'You do not have permission to do that');
+        return res.redirect(`./todos/${id}`)
+    }
+    next();
+}

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const catchAsync = require("../helpers/catchAsync");
-const { isLoggedIn, validateTodo } = require("../middleware");
+const { isLoggedIn, validateTodo, isAuthor } = require("../middleware");
 const Todo = require("../models/todo");
 
 router.get("/", catchAsync(async (req, res) => {
@@ -18,7 +18,7 @@ router.post('/', isLoggedIn, validateTodo, catchAsync(async (req, res, next) => 
   res.redirect(`/todos`);
 }))
 
-router.get('/:id', catchAsync(async (req, res,) => {
+router.get('/:id', isLoggedIn, catchAsync(async (req, res,) => {
   const todo = await Todo.findById(req.params.id).populate({
       path: 'todos',
       populate: {
